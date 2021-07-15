@@ -26,14 +26,20 @@ provider:
 
 functions:
         
-  get:
-    handler: endpoints/get.get
+  get-token:
+    handler: endpoints/getToken.get
     events:
       - http:
-          path: meta/{id}
+          path: token/{id}
           method: get
-          cors: true     
-
+          cors: true
+  get-contract:
+    handler: endpoints/getContract.get
+    events:
+      - http:
+          path: contract
+          method: get
+          cors: true
 resources:
   Resources:
     TodosDynamoDbTable:
