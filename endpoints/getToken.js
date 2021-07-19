@@ -1,8 +1,12 @@
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
-
+const s3 = new AWS.S3();
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.get = (event, context, callback) => {
+module.exports.get = async (event, context, callback) => {
+  //todo: check if token id has been minted before creating new asset
+  const id = event['pathParameters']['id'];
+  console.log({id});
+  
     const meta = {
         "description": "Friendly developer that enjoys long coding sessions", 
         "external_url": "https://knowyourmeme.com/memes/nerd-on-computer", 
@@ -34,6 +38,13 @@ module.exports.get = (event, context, callback) => {
               },
          ], 
     };
+    const buffer = Buffer.from("Testing bucket!", 'utf8');
+    const s3Resp = s3.putObject({
+      Bucket: process.env.BUCKET,
+      Key: "test2.txt",
+      Body: buffer,
+    }).promise();
+    console.log(s3Resp);
     const response = {
         statusCode: 200,
         body: JSON.stringify(meta),

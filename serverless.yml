@@ -7,6 +7,9 @@ plugins:
   - serverless-offline
   - serverless-dotenv-plugin
 
+custom:
+  bucket: 'nft-asset-bucket'
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -14,6 +17,11 @@ provider:
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
     - Effect: Allow
       Action:
         - dynamodb:Query
@@ -28,6 +36,8 @@ functions:
         
   get-token:
     handler: endpoints/getToken.get
+    environment:
+      BUCKET: ${self:custom.bucket}
     events:
       - http:
           path: token/{id}
@@ -42,7 +52,7 @@ functions:
           cors: true
 resources:
   Resources:
-    TodosDynamoDbTable:
+    AssetsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
@@ -58,3 +68,7 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+    S3AssetBucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        BucketName: ${self:custom.bucket}
