@@ -6,9 +6,21 @@ useDotenv: true
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
+  - serverless-dynamodb-local
 
 custom:
   bucket: 'nft-asset-bucket'
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    # Comment if you don't have a DynamoDB running locally
+      noStart: true
+    migration:
+      dir: offline/migrations
 
 provider:
   name: aws
