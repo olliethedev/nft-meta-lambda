@@ -26,6 +26,10 @@ module.exports.get = async (event, context, callback) => {
     const dbResp = await saveMeta(id, meta);
     console.log(dbResp);
     const response = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
       statusCode: 200,
       body: JSON.stringify(meta),
     };
