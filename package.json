@@ -5,12 +5,14 @@
   "main": "handler.js",
   "scripts": {
     "dev": "serverless offline --useChildProcesses",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix_sharp_aws": "rm -rf node_modules/sharp && SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux sharp"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "sharp": "^0.28.3"
+    "sharp": "^0.28.3",
+    "web3": "^1.5.0"
   },
   "devDependencies": {
     "aws-sdk": "2.926.0",
