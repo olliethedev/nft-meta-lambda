@@ -13,24 +13,17 @@ function pickTraits(config) {
   const outMeta = [];
   const outAssets = [];
   config.forEach((traitGroup) => {
-    probablyChooseSingle(traitGroup, (selectedTraitGroup) => {
-      chooseOne(selectedTraitGroup.choices, (selectedTrait) => {
+    chooseOne(traitGroup.choices, (selectedTrait) => {
+      if(selectedTrait.name.toLowerCase() !== "none"){
         outMeta.push({
           trait_type: traitGroup.name,
           value: selectedTrait.name,
         });
-        outAssets.push(selectedTrait.asset)
-      });
+        outAssets.push(traitGroup.folder+selectedTrait.asset)
+      }
     });
   });
   return {attributes: outMeta, assets:outAssets};
-}
-
-function probablyChooseSingle(item, onChoice) {
-  const rnd = Math.random();
-  if (rnd < item.probability) {
-    onChoice(item);
-  }
 }
 
 function chooseOne(values, onChoice) {

@@ -26,7 +26,7 @@ module.exports.get = async (event, context, callback) => {
         handleInvalidId(callback);
       } else {
         console.log("Creating new Meta...");
-        handleNewItem(idNumber, callback);
+        await handleNewItem(idNumber, callback);
       }
     }
   }
@@ -43,7 +43,7 @@ function handleInvalidId(callback) {
   callback(null, response);
 }
 
-function handleNewItem(idNumber, callback) {
+async function handleNewItem(idNumber, callback) {
   const { meta, assets } = generator(config, idNumber);
   const buffer = await imageGenerator(assets);
   console.log("got generated image buffer");
