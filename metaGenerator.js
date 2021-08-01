@@ -6,7 +6,7 @@ module.exports = function generate(config, id) {
   let meta = {
     external_url: `https://nft-asset-bucket.s3.amazonaws.com/${id}.png`,
     image: `https://nft-asset-bucket.s3.amazonaws.com/${id}.png`,
-    name: `Stickman #${id}`,
+    name: `FudMonster #${id}`,
     attributes: [...attributes],
   };
 
