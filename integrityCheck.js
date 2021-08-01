@@ -1,4 +1,5 @@
 const configFile = require("./config");
+const generator = require("./metaGenerator");
 const fs = require("fs");
 const assetFolderPath = __dirname + "/assets/";
 
@@ -8,10 +9,10 @@ function check() {
   checkProbabilityTotal(configFile);
   checkAssetPaths(configFile);
   checkAssetKeys(configFile);
+  checkComposition(configFile, 1000);
 }
 function checkProbabilityTotal(config) {
   config.forEach((layer) => {
-    // console.log(layer.name);
     var total = layer.choices.reduce(function (prev, cur) {
       return prev + cur.probability;
     }, 0);
@@ -38,7 +39,6 @@ function checkAssetPaths(config) {
         } else {
           //just an image
           const pathToCheck = assetFolderPath + layer.folder + choice.asset;
-          console.log(pathToCheck);
           if (!fs.existsSync(pathToCheck)) {
             throw new Error("Asset not found at path: " + pathToCheck);
           }
@@ -68,25 +68,38 @@ function checkAssetKeys(config) {
           if (isAssetFolder(choice.asset)) {
             const pathToCheck = assetFolderPath + layer.folder + choice.asset;
             fs.readdirSync(pathToCheck).forEach((file) => {
-                if(file.replace(".png","") !== choice.asset.replace("/","")){ // not default asset
-                    if(keys[layer.key]){
-                        if(!keys[layer.key].includes(file)){
-                            console.log(keys);
-                            console.log({choice});
-                            throw new Error("Missing asset key for item : "+ file);
-                        }
-                    }else{
-                        throw new Error("Missing asset category key : "+ layer.key);
-                    }
+              if (file.replace(".png", "") !== choice.asset.replace("/", "")) {
+                // not default asset
+                if (keys[layer.key]) {
+                  if (!keys[layer.key].includes(file)) {
+                    console.log(keys);
+                    console.log({ choice });
+                    throw new Error("Missing asset key for item : " + file);
+                  }
+                } else {
+                  throw new Error("Missing asset category key : " + layer.key);
                 }
+              }
             });
           }
         }
       });
     }
   });
-  console.log(keys);
   console.log("Asset Keys check passed!");
+}
+function checkComposition(config, times) {
+  for (var i = 0; i < times; i++) {
+    const { assets } = generator(config, i);
+    assets.forEach((asset) => {
+      const assetPath = assetFolderPath+asset;
+      if (!fs.existsSync(assetPath)) {
+        console.log(assetPath);
+        throw new Error("Asset path not found : " + assetPath);
+      }
+    });
+  }
+  console.log("Composition check passed!");
 }
 
 function isAssetFolder(assetString) {
