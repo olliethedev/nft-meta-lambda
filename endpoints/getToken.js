@@ -15,8 +15,8 @@ module.exports.get = async (event, context, callback) => {
     console.log("Got invalid id param ...");
     handleInvalidId(callback);
   } else {
+    console.log("Getting Meta...");
     const existingMeta = await getMeta(idNumber.toString());
-    console.log("Got existing Meta...");
     if (existingMeta) {
       handleExistingItem(existingMeta, callback);
     } else {
