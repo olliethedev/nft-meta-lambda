@@ -47,7 +47,7 @@ async function handleNewItem(idNumber, callback) {
   const { meta, assets } = generator(config, idNumber);
   const buffer = await imageGenerator(assets);
   console.log("got generated image buffer");
-  await imageStorage(buffer, idNumber);
+  imageStorage(buffer, idNumber); //dont await for image upload to avoid race conditions for new mint
   console.log("saved image to storage");
   const dbResp = await saveMeta(idNumber.toString(), meta);
   console.log(dbResp);

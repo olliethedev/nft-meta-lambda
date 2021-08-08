@@ -2,8 +2,8 @@
 
 module.exports.get = (event, context, callback) => {
     const meta = {
-        "name": "FudMonsers",
-        "description": "Collection of FudMonsters.",
+        "name": "Test Name",
+        "description": "Collection of Test Assets.",
         // "image": "https://www.publicdomainpictures.net/pictures/230000/velka/running-stickman.jpg",
         // "external_link": "https://www.publicdomainpictures.net/pictures/230000/velka/running-stickman.jpg",
     };
