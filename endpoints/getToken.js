@@ -5,6 +5,7 @@ const imageStorage = require("../imageStorage");
 const { getMeta, saveMeta } = require("../metaStorage");
 const { getCurrentId } = require("../contract");
 
+const hideMetadata = true;
 module.exports.get = async (event, context, callback) => {
   //todo: check if token id has been minted before creating new asset
   const id = event["pathParameters"]["id"];
@@ -25,12 +26,31 @@ module.exports.get = async (event, context, callback) => {
         console.log("Got invalid id based on contract state...");
         handleInvalidId(callback);
       } else {
-        console.log("Creating new Meta...");
-        await handleNewItem(idNumber, callback);
+        if(hideMetadata){
+          console.log("Using placeholder meta...");
+          getPlaceholderMetadata(id, callback)
+        }else{
+          console.log("Creating new Meta...");
+          await handleNewItem(idNumber, callback);
+        }
       }
     }
   }
 };
+
+function getPlaceholderMetadata(id, callback) {
+  let meta = {
+    name: `Monster #${id}`,
+  };
+  const response = {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify(meta),
+  };
+  callback(null, response);
+}
 
 function handleInvalidId(callback) {
   const response = {

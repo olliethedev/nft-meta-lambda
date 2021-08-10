@@ -4,9 +4,8 @@ const assetFolderPath = __dirname + "/assets/";
 module.exports = function generate(config, id) {
   const {attributes, assets} = pickTraits(config)
   let meta = {
-    external_url: `https://nft-asset-bucket.s3.amazonaws.com/${id}.png`,
     image: `https://nft-asset-bucket.s3.amazonaws.com/${id}.png`,
-    name: `FudMonster #${id}`,
+    name: `Monster #${id}`,
     attributes: [...attributes],
   };
 
