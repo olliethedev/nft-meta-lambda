@@ -41,6 +41,8 @@ module.exports.get = async (event, context, callback) => {
 function getPlaceholderMetadata(id, callback) {
   let meta = {
     name: `Monster #${id}`,
+    attributes: [],
+    image: 'https://lh3.googleusercontent.com/DaBgHYG67N_G_b9jkY3N3x6tq6bwgJvAGkQ7pisFe4DegOW4WJkTOPEhJvdDB8o6BpI7NnIwAMI4YaYF2ZJMO88wqGGKFTtS3ywC2A=s130',
   };
   const response = {
     statusCode: 200,
