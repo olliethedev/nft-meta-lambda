@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "serverless offline --useChildProcesses",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "fix_sharp_local": "rm -rf node_modules/sharp && npm install sharp",
     "fix_sharp_aws": "rm -rf node_modules/sharp && SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux sharp"
   },
   "author": "",

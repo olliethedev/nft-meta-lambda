@@ -34,15 +34,21 @@ function pickTraits(config) {
 }
 
 function lookUpAssets(assetPath, asset, traitGroup, keys) {
-  
+  // console.log({assetPath, asset, traitGroup,})
   if(traitGroup.key){
     const variantPath = assetFolderPath+assetPath+keys[traitGroup.key];
-    if(traitGroup.key && fs.existsSync(variantPath)){//key exists and exists in folder
+    const defaultVariantPath = assetFolderPath +assetPath+asset.replace("/",".png");
+    if(fs.existsSync(variantPath) && fs.lstatSync(variantPath).isFile()){//asset exists in trait folder
+      // console.log("returning 1:"+(assetPath+keys[traitGroup.key]));
       return assetPath+keys[traitGroup.key];
-    }else{//default asset
+    }else if(fs.existsSync(defaultVariantPath)){//default asset in trait folder
+      // console.log("returning 2:"+defaultVariantPath);
       return assetPath+asset.replace("/",".png");
+    }else{ //default asset
+      // console.log("returning 3:"+assetPath);
+      return assetPath;
     }
-  }else{
+  }else{//default asset
     return assetPath;
   }
 }

@@ -1,6 +1,7 @@
 const configFile = require("./config");
 const generator = require("./metaGenerator");
 const fs = require("fs");
+const imageGenerator = require('./imageGenerator');
 const assetFolderPath = __dirname + "/assets/";
 
 function check() {
@@ -9,7 +10,7 @@ function check() {
   checkProbabilityTotal(configFile);
   checkAssetPaths(configFile);
   checkAssetKeys(configFile);
-  checkComposition(configFile, 1000);
+  checkComposition(configFile, 10000);
 }
 function checkProbabilityTotal(config) {
   config.forEach((layer) => {
@@ -77,7 +78,8 @@ function checkAssetKeys(config) {
                     throw new Error("Missing asset key for item : " + file);
                   }
                 } else {
-                  throw new Error("Missing asset category key : " + layer.key);
+                  console.log(keys)
+                  throw new Error("Missing asset category key : " + layer.key + "/"+choice.asset);
                 }
               }
             });
@@ -88,16 +90,19 @@ function checkAssetKeys(config) {
   });
   console.log("Asset Keys check passed!");
 }
-function checkComposition(config, times) {
+async function checkComposition(config, times) {
   for (var i = 0; i < times; i++) {
     const { assets } = generator(config, i);
     assets.forEach((asset) => {
       const assetPath = assetFolderPath+asset;
-      if (!fs.existsSync(assetPath)) {
+      if ( !fs.existsSync(assetPath) || !fs.lstatSync(assetPath).isFile()) {
+        console.log({asset});
         console.log(assetPath);
         throw new Error("Asset path not found : " + assetPath);
       }
     });
+    // console.log({assets})
+    // await imageGenerator(assets);
   }
   console.log("Composition check passed!");
 }
