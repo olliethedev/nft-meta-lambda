@@ -1,7 +1,7 @@
 const configFile = require("./config");
 const generator = require("./metaGenerator");
 const fs = require("fs");
-const imageGenerator = require('./imageGenerator');
+// const imageGenerator = require('./imageGenerator');
 const assetFolderPath = __dirname + "/assets/";
 
 function check() {

@@ -101,7 +101,7 @@ module.exports = [
         choices:[
             {
                 name:"FM Shirt",
-                probability: 0.2216,
+                probability: 0.2772,
                 asset:"fmshirt.png"
             },
             {
@@ -135,11 +135,6 @@ module.exports = [
                 asset:"bloodstainshirt.png"
             },
             {
-                name:"FUD you",
-                probability: 0.0477,
-                asset:"fudyou.png"
-            },
-            {
                 name:"Varsity Jacket",
                 probability: 0.0366,
                 asset:"varsityjacket.png"
@@ -168,11 +163,6 @@ module.exports = [
                 name:"White Tux",
                 probability: 0.0113,
                 asset:"whitetuxedo.png"
-            },
-            {
-                name:"Don't Sell Me",
-                probability: 0.0078,
-                asset:"dontsellme.png"
             },
             {
                 name:"Tactical Vest",
