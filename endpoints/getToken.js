@@ -5,7 +5,7 @@ const imageStorage = require("../imageStorage");
 const { getMeta, saveMeta } = require("../metaStorage");
 const { getCurrentId } = require("../contract");
 
-const hideMetadata = false;
+const hideMetadata = true;
 module.exports.get = async (event, context, callback) => {
   //todo: check if token id has been minted before creating new asset
   const id = event["pathParameters"]["id"];
