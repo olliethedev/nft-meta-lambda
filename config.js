@@ -101,12 +101,12 @@ module.exports = [
         choices:[
             {
                 name:"FM Shirt",
-                probability: 0.2772,
+                probability: 0.272155,
                 asset:"fmshirt.png"
             },
             {
                 name:"Bad Actors",
-                probability: 0.1430,
+                probability: 0.137955,
                 asset:"badactorsshirt.png"
             },
             {
@@ -212,7 +212,7 @@ module.exports = [
             },
             {
                 name:"Cloves of Garlic",
-                probability: 0.0107,
+                probability: 0.0106,
                 asset:"garlicnecklace/"
             },
             {
@@ -229,41 +229,41 @@ module.exports = [
         choices:[
             {
                 name:"None",
-                probability: 0.2364,
+                probability: 0.19,
             },
             {
                 name:"Blue Cap",
-                probability: 0.1563,
+                probability: 0.120011,
                 asset:"bluecap/"
             },
             {
                 name:"Company Hat",
-                probability: 0.1344,
+                probability: 0.115,
                 asset:"companyhat/"
             },
             {
                 name:"Snapback",
-                probability: 0.1063,
+                probability: 0.10,
                 asset:"snapback/"
             },
             {
                 name:"Rasta Hat",
-                probability: 0.0906,
+                probability: 0.09,
                 asset:"rasta/"
             },
             {
                 name:"Orange Beanie",
-                probability: 0.0719,
+                probability: 0.07007,
                 asset:"orangebeanie/"
             },
             {
                 name:"Conductor Hat",
-                probability: 0.0625,
+                probability: 0.062109,
                 asset:"conductorhat/"
             },
             {
                 name:"Construction Hat",
-                probability: 0.0531,
+                probability: 0.05312,
                 asset:"constructionhat/"
             },
             {
@@ -335,7 +335,7 @@ module.exports = [
         choices:[
             {
                 name:"None",
-                probability: 0.2363
+                probability: 0.23611
             },
             {
                 name:"Spotted Rat",

@@ -10,14 +10,14 @@ function check() {
   checkProbabilityTotal(configFile);
   checkAssetPaths(configFile);
   checkAssetKeys(configFile);
-  checkComposition(configFile, 10000);
+  checkComposition(configFile, 50000);
 }
 function checkProbabilityTotal(config) {
   config.forEach((layer) => {
     var total = layer.choices.reduce(function (prev, cur) {
       return prev + cur.probability;
     }, 0);
-    if (total < 0.99999) {
+    if (total < 0.99999 || total > 1.00001) {
       throw new Error(
         "Probabilities check failed in " +
           layer.name +
@@ -102,6 +102,11 @@ async function checkComposition(config, times) {
       }
     });
     // console.log({assets})
+    assets.forEach(item=>{
+      if(item.startsWith('hats/icecream')){
+        console.log({item})
+      }
+    })
     // await imageGenerator(assets);
   }
   console.log("Composition check passed!");
